@@ -1,0 +1,86 @@
+<button class="btn btn-default" (click)="openModal()">
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+        stroke="currentColor" class="w-6 h-6">
+        <path stroke-linecap="round" stroke-linejoin="round"
+            d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182m0-4.991v4.99" />
+    </svg>
+
+</button>
+<!-- Modal -->
+<div class="modal" tabindex="-1" role="dialog"  [ngStyle]="{'display':display}">
+    <div class="modal-dialog" role="document">
+          <div class="modal-content">
+                <div class="modal-header">
+                      <h4 class="modal-title">Modification Produit</h4>
+                      <button type="button" class="btn btn-default" aria-label="Close" (click)="closeModal()"><span aria-hidden="true">&times;</span></button>
+                    </div>
+                <div class="modal-body">
+                    <template *ngTemplateOutlet="formProduct"></template>
+                </div>
+                <div class="modal-footer">
+                      <button type="button" class="btn btn-default" (click)="closeModal()" >Close</button>
+                </div>
+       </div>
+    </div>
+</div>
+
+<!-- Form -->
+
+<ng-template #formProduct>
+    
+    <form (ngSubmit)="updatearticle()">
+        <div class="mb-3">
+            
+            <input type="text" class="form-control" id="name"  name = "name" placeholder="name" [(ngModel)]="products.name" >
+          </div>
+          <div class="mb-3">
+            
+            <input required minlength="4" #designation="ngModel"
+            type="text" class="form-control" id="description"  name = "description" placeholder="description *" [(ngModel)]="products.description" >
+          </div>
+          
+          <div class="mb-3">
+            
+            <input type="number" class="form-control" id="prix"  name = "prix" placeholder="Prix" [(ngModel)]="products.prix" >
+          </div>
+          <div class="mb-3">
+            
+            <input type="date" class="form-control" id="dateDebut"  name = "dateDebut" placeholder="dateDebut"  [(ngModel)]="date1" >
+          </div>
+         
+          <div class="mb-3">
+            <input type="date" class="form-control" id="dateFin"  name = "dateFin" placeholder="dateFin"  [(ngModel)]="date2" >
+          </div>
+
+          <div>
+              <file-pond #myPond 
+                  [options]="pondOptions"
+                  [files]="pondFiles"
+                >
+              </file-pond>
+           </div>
+           <div class="mb-3">
+            
+            <input type="text" class="form-control" id="dateDebut"  name = "video" placeholder="video" [(ngModel)]="products.video" >
+          </div>
+          <div class="mb-3">
+            
+            <input type="text" class="form-control" id="time"  name = "time" placeholder="time" [(ngModel)]="products.time" >
+          </div>
+          <div class="mb-3">
+          Catégories :    <select name="scategorieID" class="form-control" [(ngModel)]="products.categorieID1" >
+                      <option *ngFor="let sd of scategories" value="{{sd._id}}">
+                          {{sd.categorieName}}
+                          
+                      </option>
+                    </select>
+                  </div>
+             
+        
+        <div>
+          <button type="submit" class="btn btn-success" (clic)="updatearticle()">Enregistrer</button>
+        </div>
+       
+        </form>
+
+</ng-template>

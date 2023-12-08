@@ -1,0 +1,43 @@
+<!-- Button trigger modal -->
+<button type="button" (click)="openModal()"
+    class="text-white bg-gradient-to-br from-green-400 to-blue-600 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-green-200 dark:focus:ring-green-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2">Ajouter
+    nouvelle filme
+</button>
+
+<!-- Modal -->
+<div class="modal" tabindex="-1" role="dialog" [ngStyle]="{'display':display}">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Ajout Categorie</h4>
+                <button type="button" class="btn btn-default" aria-label="Close" (click)="closeModal()"><span
+                        aria-hidden="true">&times;</span></button>
+            </div>
+            <div class="modal-body">
+                <template *ngTemplateOutlet="formProduct"></template>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" (click)="closeModal()">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Form -->
+
+<ng-template #formProduct>
+
+    <form (ngSubmit)="ajoutarticle()">
+       
+        <div class="mb-3">
+
+            <input type="text" class="form-control" id="designation" name="description" placeholder="categorie"
+                [(ngModel)]="products.categorieName">
+        </div>
+        <div>
+            <button type="submit" class="btn btn-success" (clic)="ajoutarticle()">Enregistrer</button>
+        </div>
+
+    </form>
+
+</ng-template>
